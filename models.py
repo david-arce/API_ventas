@@ -1,9 +1,68 @@
-from sqlalchemy import Column, Integer, String
-from .database import Base
+from sqlalchemy import Column, Integer, String, DECIMAL, Text, Boolean
+from database import Base
 
-class UserApi(Base):
-    __tablename__ = "userApi"
+class User(Base):
+    __tablename__ = "usuarios_api"
 
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
+    
+class Producto(Base):
+    __tablename__ = "productos_venta"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    yyyy = Column(Integer)
+    mm = Column(Integer)
+    dd = Column(Integer)
+    fecha = Column(String(50))
+    hora = Column(String(20))
+    clase = Column(String(50))
+    tipo = Column(String(10))
+    numero = Column(Integer)
+    ven_cob = Column(String(50))
+    ven_cc = Column(String(50))
+    ven_nom = Column(String(255))
+    ccnit = Column(String(50))
+    cliente_nom = Column(String(255))
+    telef = Column(String(50))
+    ciudad = Column(String(50))
+    direccion = Column(Text)
+    cliente_grp = Column(String(50))
+    cliente_grp_nom = Column(String(255))
+    ciudad_nom = Column(String(255))
+    cliente_creado = Column(String(50))
+    zona = Column(String(50))
+    zona_nom = Column(String(255))
+    bod = Column(String(50))
+    bod_nom = Column(String(255))
+    indinv = Column(String(10))
+    sku = Column(String(50))
+    umd = Column(String(50))
+    sku_nom = Column(String(255))
+    marca = Column(String(50))
+    marca_nom = Column(String(255))
+    linea = Column(String(50))
+    linea_nom = Column(String(255))
+    categ1 = Column(String(50))
+    categ1_nom = Column(String(255))
+    categ2 = Column(String(50))
+    categ2_nom = Column(String(255))
+    proveedor = Column(String(50))
+    proveedor_nom = Column(String(255))
+    detalle = Column(Text)
+    listap = Column(Text)
+    metodo_pago = Column(String(50))
+    iva_porc = Column(DECIMAL(10,2))
+    cantidad = Column(Integer)
+    precio_b = Column(DECIMAL(20,2))
+    precio_d = Column(DECIMAL(20,2))
+    dcto1 = Column(DECIMAL(20,2))
+    descuento = Column(DECIMAL(20,2))
+    subtotal = Column(DECIMAL(20,2))
+    iva = Column(DECIMAL(20,2))
+    venta = Column(DECIMAL(20,2))
+    costo_ult = Column(DECIMAL(20,2))
+    costo_pro = Column(DECIMAL(20,2))
+    costo_vta = Column(DECIMAL(20,2))
