@@ -1,4 +1,4 @@
-# main.py
+from datetime import datetime, timedelta
 import os
 import pandas as pd
 from fastapi import FastAPI, Depends, HTTPException
@@ -31,6 +31,29 @@ def get_productos(filtro: FiltroFecha, db: Session = Depends(get_db), current_us
     fechaInicio = filtro.fecha_inicio
     fechaFin = filtro.fecha_fin
     
+    # Convertir a objetos datetime
+    try:
+        fecha_inicio = datetime.strptime(filtro.fecha_inicio, "%Y%m%d")
+        fecha_fin = datetime.strptime(filtro.fecha_fin, "%Y%m%d")
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Formato de fecha inválido. Usa AAAAMMDD.")
+
+    # Validar rango de fechas
+    hoy = datetime.now()
+    hace_dos_meses = hoy - timedelta(days=60)
+
+    if fecha_inicio < hace_dos_meses or fecha_fin < hace_dos_meses:
+        raise HTTPException(
+            status_code=400,
+            detail="Solo se permiten consultas de los últimos 2 meses."
+        )
+
+    if fecha_inicio > fecha_fin:
+        raise HTTPException(
+            status_code=400,
+            detail="La fecha de inicio no puede ser posterior a la fecha fin."
+        )
+        
     productos = (
     db.query(Producto)
     .filter(

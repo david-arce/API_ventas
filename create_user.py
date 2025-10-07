@@ -24,4 +24,4 @@ def create_user(username: str, password: str, is_active: bool = True):
 
 if __name__ == "__main__":
     # Cambia estas credenciales por las que quieras
-    create_user("david", "david21")
+    create_user("zoetis", "*/1f3Tor#c00K")
