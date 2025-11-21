@@ -66,3 +66,21 @@ class Producto(Base):
     costo_ult = Column(DECIMAL(20,2))
     costo_pro = Column(DECIMAL(20,2))
     costo_vta = Column(DECIMAL(20,2))
+    tpper = Column(String(10))
+    
+class Inventario(Base):
+    __tablename__ = "inventario"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    cta = Column(String(50))
+    marca = Column(String(50))
+    marca_nom = Column(String(100))
+    sku = Column(String(50))
+    sku_nom = Column(String(200))
+    lpt = Column(String(8))
+    bod = Column(String(10))
+    bod_nom = Column(String(100))
+    inv_saldo = Column(Integer)
+    inv_trsto = Column(Integer)
+    vlr_unit = Column(DECIMAL(20,2))
+    vlr_total = Column(DECIMAL(20,2))
